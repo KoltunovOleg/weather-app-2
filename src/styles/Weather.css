@@ -1,0 +1,28 @@
+.weather-holder {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cloud,
+.temp {
+  /*width: 50%;*/
+}
+
+.wicon {
+  margin-right: 40px;
+  width: 100px;
+  height: 100px;
+}
+
+.temp {
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  text-align: center;
+}
+
+.precipitation,
+.wind {
+  width: 100%;
+  font-size: 20px;
+}

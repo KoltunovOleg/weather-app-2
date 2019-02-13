@@ -1,0 +1,75 @@
+.nav-opener {
+	position: absolute;
+	height: 28px;
+	width: 40px;
+	z-index: 100;
+
+}
+
+.nav-opener:before,
+.nav-opener:after {
+	content: '';
+	display: block;
+}
+
+.nav-opener span,
+.nav-opener:before,
+.nav-opener:after {
+	position: absolute;
+	height: 4px;
+	width: 100%;
+	background-color: #fff;
+}
+
+.nav-opener span {
+	display: block;
+	top: 0;
+	text-indent: -9999px;
+}
+
+.nav-opener:before {
+	top: 12px;
+}
+
+.nav-opener:after {
+	bottom: 0;
+}
+
+
+
+
+.drop {
+	padding: 60px 20px 20px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: linear-gradient(135deg, #d2dfed 0%,#c8d7eb 26%,#bed0ea 51%,#a6c0e3 51%,#afc7e8 62%,#bad0ef 75%,#99b5db 88%,#799bc8 100%);
+	transition: transform 0.3s;
+}
+
+
+.drop.hidden {
+	transform: translateX(-100%);
+	transition: transform 0.3s;
+}
+
+.location-item {
+	padding: 10px 10px 10px 50px;
+	margin-bottom: 20px;
+	position: relative;
+	border: 1px solid #f5f9f0;
+	text-align: right;
+}
+
+.location-item .btn-delete {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.location-item .temp {
+	display: block;
+	text-align: right;
+}

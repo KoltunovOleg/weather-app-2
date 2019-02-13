@@ -1,0 +1,30 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	height: 100vh;
+	font: 14px "Century Gothic", Futura, sans-serif;
+}
+
+ol, ul {
+	padding-left: 30px;
+}
+
+.app {
+	position: relative;
+	padding: 15px 25px;
+	height: 100vh;
+	background-position: 50% 50%;
+	background-size: cover;
+	color: white;
+}
+
+.app.day {
+	color: black;
+}
+
+.app-header {
+	/*position: relative;*/
+}
