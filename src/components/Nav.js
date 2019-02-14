@@ -6,21 +6,15 @@ class Nav extends Component {
 	constructor (props) {
 		super(props);
 
-		this.state = {
-			showDrop: false
-		};
-
 		this.handleClick = this.handleClick.bind(this);
 	}
 
 	handleClick (e) {
 		e.preventDefault();
-		this.setState({showDrop: !this.state.showDrop });
+		this.props.onShowDrop();
 	}
 
-
 	render() {
-		const {showDrop} = this.state;
 		return (
 			<div className="navigation">
 			<a className="nav-opener"
@@ -28,7 +22,7 @@ class Nav extends Component {
 			onClick={this.handleClick} >
 			<span>Menu</span>
 			</a>
-			<Drop showDrop={showDrop} />
+			<Drop/>
 			</div>
 			);
 	}

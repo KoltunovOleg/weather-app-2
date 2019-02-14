@@ -1,39 +1,32 @@
 import React, { Component } from 'react';
+import LocationItem from './LocationItem';
+import Search from './Search';
 
 class Drop extends Component {
 	constructor (props) {
 		super(props);
-
 		this.state = {
 			showDrop: false
-		};
+		}
+
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick () {
+		this.setState({showDrop: !this.state.showDrop });
 	}
 
 		render() {
-			const {showDrop} = this.props;
-			const classHidden = showDrop ? "" : "hidden";
-			
+			const search =  this.state.showDrop ? <Search/>: null;
 			return (
-				<div className={`drop ${classHidden}`}>
-					<div className="list-location">
-						<div className="location-item current">
-							<button className="btn-delete">Delete</button>
-							<div className="location-info">
-								<span className="place">Kharkiv</span>
-								<span className="temp">10 &ordm;C</span>
-							</div>
-						</div>
-						<div className="location-item">
-							<button className="btn-delete">Delete</button>
-							<div className="location-info">
-								<span className="place">Maroco</span>
-								<span className="temp">22 &ordm;C</span>
-							</div>
-						</div>
-					</div>
-					<button className="btn-add">Add place</button>
+				<div className="drop">
+					<LocationItem/>
+						{search}
+					<button className="btn-add" 
+					onClick={this.handleClick}
+					>Add place</button>
 				</div>
-				);
+			);
 		}
 }
 

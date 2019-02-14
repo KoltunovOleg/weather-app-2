@@ -15,8 +15,14 @@ class App extends Component {
 			dataArr: false,
 			bgImg: "",
 			daypart: "",
-
+			showDrop: false,
 		};
+
+		this.onShowDrop = this.onShowDrop.bind(this);
+	}
+
+	onShowDrop () {
+		this.setState({showDrop: !this.state.showDrop });
 	}
 
 	componentDidMount() {
@@ -70,11 +76,12 @@ class App extends Component {
 
 
 	render() {
-		const { bgImg, daypart, dataArr } = this.state;
+		const { bgImg, daypart, dataArr, showDrop} = this.state;
+		const classHidden = showDrop ? "active-nav" : "";
 		return (
-			<div className={`app ${daypart}`} style={{backgroundImage: bgImg}}>
+			<div className={`app ${daypart} ${classHidden}`} style={{backgroundImage: bgImg}}>
 				<header className="app-header">
-					<Nav/>
+					<Nav onShowDrop={this.onShowDrop} />
 				</header>
 				<Location/>
 				<div className="date-holder">

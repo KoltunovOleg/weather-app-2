@@ -1,7 +1,7 @@
 .nav-opener {
 	position: absolute;
-	height: 28px;
-	width: 40px;
+	height: 21px;
+	width: 35px;
 	z-index: 100;
 
 }
@@ -16,7 +16,7 @@
 .nav-opener:before,
 .nav-opener:after {
 	position: absolute;
-	height: 4px;
+	height: 3px;
 	width: 100%;
 	background-color: #fff;
 }
@@ -25,17 +25,18 @@
 	display: block;
 	top: 0;
 	text-indent: -9999px;
+	transition: transform 0.3s;
 }
 
 .nav-opener:before {
-	top: 12px;
+	top: 9px;
+	transition: transform 0.3s, opacity 0.3s;
 }
 
 .nav-opener:after {
 	bottom: 0;
+	transition: transform 0.3s;
 }
-
-
 
 
 .drop {
@@ -46,13 +47,30 @@
 	left: 0;
 	width: 100%;
 	background: linear-gradient(135deg, #d2dfed 0%,#c8d7eb 26%,#bed0ea 51%,#a6c0e3 51%,#afc7e8 62%,#bad0ef 75%,#99b5db 88%,#799bc8 100%);
+	transform: translateX(-100%);
 	transition: transform 0.3s;
 }
 
-
-.drop.hidden {
-	transform: translateX(-100%);
+.active-nav .drop {
+	transform: translateX(0);
 	transition: transform 0.3s;
+}
+
+.active-nav .nav-opener:before {
+	opacity: 0;
+	transform: translateX(-50%);
+	transition: transform 0.3s, opacity 0.1s ease 0.1s;
+}
+
+.active-nav .nav-opener:after {
+	bottom: auto;
+	top: 9px;
+	transform: rotate(-45deg);
+}
+
+.active-nav .nav-opener span {
+	top: 9px;
+	transform: rotate(45deg);
 }
 
 .location-item {
