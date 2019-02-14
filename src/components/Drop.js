@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LocationItem from './LocationItem';
+import NavOpener from './NavOpener';
 import Search from './Search';
 
 class Drop extends Component {
@@ -17,10 +18,12 @@ class Drop extends Component {
 	}
 
 		render() {
-			const search =  this.state.showDrop ? <Search/>: null;
+			const {onShowDrop} = this.props;
+			const search =  this.state.showDrop ? <Search onShowList={this.handleClick}/>: null;
 			return (
 				<div className="drop">
-					<LocationItem/>
+				<NavOpener onShowDrop={onShowDrop}/>
+					<LocationItem />
 						{search}
 					<button className="btn-add" 
 					onClick={this.handleClick}

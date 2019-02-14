@@ -4,6 +4,7 @@ import DateComponent from './components/DateComponent';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Nav from './components/Nav';
+import customData from './weather.json';
 import './styles/App.css';
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
 		this.state = { 
 			error: null,
 			isLoaded: false,
-			dataArr: false,
+			dataArr: customData,
 			bgImg: "",
 			daypart: "",
 			showDrop: false,
@@ -26,27 +27,30 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		
-		fetch("http://api.openweathermap.org/data/2.5/weather?zip=61031,ua&units=metric&lang=ua&APPID=54688ee88a6a2630601c504f2b93f60a")
-			.then(res => res.json())
-			.then(
-				(result) => {
-					this.setState({
-						isLoaded: true,
-						dataArr: result
-					});
-					this.setBgImage();
-				},
-				// Note: it's important to handle errors here
-				// instead of a catch() block so that we don't swallow
-				// exceptions from actual bugs in components.
-				(error) => {
-					this.setState({
-						isLoaded: true,
-						error
-					});
-				}
-			);
+		this.setBgImage();
+		//http://api.openweathermap.org/data/2.5/weather?zip=61031,ua&units=metric&lang=ua&APPID=54688ee88a6a2630601c504f2b93f60a
+		// fetch("./weather.json")
+		// 	.then(res => res.json())
+		// 	.then(
+		// 		(result) => {
+		// 			console.log(result);
+		// 			this.setState({
+		// 				isLoaded: true,
+		// 				dataArr: result
+		// 			});
+		// 			this.setBgImage();
+		// 		},
+		// 		// Note: it's important to handle errors here
+		// 		// instead of a catch() block so that we don't swallow
+		// 		// exceptions from actual bugs in components.
+		// 		(error) => {
+		// 			console.log(error);
+		// 			this.setState({
+		// 				isLoaded: true,
+		// 				error
+		// 			});
+		// 		}
+		// 	);
 	}
 
 	getDayTime() {

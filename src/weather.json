@@ -1,0 +1,40 @@
+{
+	"coord": {
+		"lon": 36.23,
+		"lat": 49.99
+	},
+	"weather": [{
+		"id": 800,
+		"main": "Clear",
+		"description": "чисте небо",
+		"icon": "01d"
+	}],
+	"base": "stations",
+	"main": {
+		"temp": 0,
+		"pressure": 1027,
+		"humidity": 88,
+		"temp_min": 0,
+		"temp_max": 0
+	},
+	"visibility": 10000,
+	"wind": {
+		"speed": 1,
+		"deg": 190
+	},
+	"clouds": {
+		"all": 0
+	},
+	"dt": 1550154600,
+	"sys": {
+		"type": 1,
+		"id": 8905,
+		"message": 0.0042,
+		"country": "UA",
+		"sunrise": 1550119628,
+		"sunset": 1550155925
+	},
+	"id": 400004745,
+	"name": "Kharkiv",
+	"cod": 200
+}

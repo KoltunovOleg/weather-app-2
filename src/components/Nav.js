@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
 import Drop from './Drop';
+import NavOpener from './NavOpener';
 import '../styles/Nav.css';
 
 class Nav extends Component {
 	constructor (props) {
 		super(props);
-
-		this.handleClick = this.handleClick.bind(this);
-	}
-
-	handleClick (e) {
-		e.preventDefault();
-		this.props.onShowDrop();
 	}
 
 	render() {
+		const {onShowDrop} = this.props;
 		return (
 			<div className="navigation">
-			<a className="nav-opener"
-			href="#"
-			onClick={this.handleClick} >
-			<span>Menu</span>
-			</a>
-			<Drop/>
+			<NavOpener onShowDrop={onShowDrop}/>
+			<Drop onShowDrop={onShowDrop}/>
 			</div>
 			);
 	}

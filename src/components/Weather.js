@@ -28,7 +28,7 @@ class Weather extends Component {
 		daypart = this.getDayTime(nextProps);
 		if (weatnerID === 800 && daypart === "day") {
 			this.setState({iconUrl: "/img/collection/bright.svg"});
-		} else if (weatnerID === 800 && daypart === "night.svg") {
+		} else if (weatnerID === 800 && daypart === "night") {
 			this.setState({iconUrl: "/img/collection/night.svg"});
 		} else if (weatnerID === 801 && daypart === "day") {
 			this.setState({iconUrl: "/img/collection/cloud.svg"});
@@ -40,8 +40,8 @@ class Weather extends Component {
 			this.setState({iconUrl: "/img/collection/light-rain-day.svg"});
 		} else if (weatnerID === 500 && daypart === "night" ) {
 			this.setState({iconUrl: "/img/collection/light-rain-night.svg"});
-		} else if (weatnerID >= 501 && weatnerID <= 531
-		 || weatnerID >= 300 && weatnerID <= 321 ) {
+		} else if ((weatnerID >= 501 && weatnerID <= 531)
+		 || (weatnerID >= 300 && weatnerID <= 321) ) {
 			this.setState({iconUrl: "/img/collection/rain.svg"});
 		} else if (600 <= weatnerID && weatnerID <= 622) {
 			this.setState({iconUrl: "/img/collection/snow.svg"});
