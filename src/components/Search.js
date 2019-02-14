@@ -21,7 +21,11 @@ class Search extends Component {
 		//   console.log(item.name);
 		// });
 
-			console.log(e.target.value, list);
+		for (var i = list.length - 1; i >= 0; i--) {
+			console.log(list[i]);
+		}
+
+			// console.log(e.target.value, list);
 	}
 
 	render() {

@@ -13,7 +13,7 @@ class App extends Component {
 		this.state = { 
 			error: null,
 			isLoaded: false,
-			dataArr: customData,
+			dataArr: false,
 			bgImg: "",
 			daypart: "",
 			showDrop: false,
@@ -27,30 +27,31 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		this.setBgImage();
+		// this.setBgImage();
 		//http://api.openweathermap.org/data/2.5/weather?zip=61031,ua&units=metric&lang=ua&APPID=54688ee88a6a2630601c504f2b93f60a
-		// fetch("./weather.json")
-		// 	.then(res => res.json())
-		// 	.then(
-		// 		(result) => {
-		// 			console.log(result);
-		// 			this.setState({
-		// 				isLoaded: true,
-		// 				dataArr: result
-		// 			});
-		// 			this.setBgImage();
-		// 		},
-		// 		// Note: it's important to handle errors here
-		// 		// instead of a catch() block so that we don't swallow
-		// 		// exceptions from actual bugs in components.
-		// 		(error) => {
-		// 			console.log(error);
-		// 			this.setState({
-		// 				isLoaded: true,
-		// 				error
-		// 			});
-		// 		}
-		// 	);
+		import("./weather.json")
+			// .then(res => res.json())
+			.then(
+				(result) => {
+					console.log(result);
+					this.setState({
+						isLoaded: true,
+						dataArr: result
+					});
+					this.setBgImage();
+					console.log(result)
+				},
+				// Note: it's important to handle errors here
+				// instead of a catch() block so that we don't swallow
+				// exceptions from actual bugs in components.
+				(error) => {
+					console.log(error);
+					this.setState({
+						isLoaded: true,
+						error
+					});
+				}
+			);
 	}
 
 	getDayTime() {
