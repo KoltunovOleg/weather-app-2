@@ -4,9 +4,6 @@ import NavOpener from './NavOpener';
 import '../styles/Nav.css';
 
 class Nav extends Component {
-	constructor (props) {
-		super(props);
-	}
 
 	render() {
 		const {onShowDrop} = this.props;

@@ -4,7 +4,6 @@ import DateComponent from './components/DateComponent';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Nav from './components/Nav';
-import customData from './weather.json';
 import './styles/App.css';
 
 class App extends Component {
@@ -27,19 +26,18 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+
 		// this.setBgImage();
 		//http://api.openweathermap.org/data/2.5/weather?zip=61031,ua&units=metric&lang=ua&APPID=54688ee88a6a2630601c504f2b93f60a
 		import("./weather.json")
 			// .then(res => res.json())
 			.then(
 				(result) => {
-					console.log(result);
 					this.setState({
 						isLoaded: true,
 						dataArr: result
 					});
 					this.setBgImage();
-					console.log(result)
 				},
 				// Note: it's important to handle errors here
 				// instead of a catch() block so that we don't swallow
