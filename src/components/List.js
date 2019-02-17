@@ -9,9 +9,9 @@ class Search extends Component {
 	}
 
 	handleClick(e) {
-		console.log(e.target.textContent.split(', '));
 		if(e.target.className === "item-result") {
-			// this.props.onShowList();
+			this.props.onShowList();
+			this.props.getAddLocation(e.target.textContent.split(', '));
 		}
 
 	}
@@ -27,7 +27,7 @@ class Search extends Component {
 		});
 			return (<ul className="search-result" onClick={this.handleClick}>{items}</ul>)
 		} else {
-			return (<div></div>)
+			return false;
 		}
 	}
 }

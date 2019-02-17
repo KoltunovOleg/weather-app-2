@@ -61,7 +61,7 @@ class Search extends Component {
 	}
 
 	render() {
-		const {onShowList} = this.props;
+		const {onShowList, getAddLocation} = this.props;
 
 		return (
 
@@ -70,7 +70,10 @@ class Search extends Component {
 					onClick={onShowList}
 				><span>Close</span></button>
 				<input className="form-control" onKeyUp={this.getLocation} placeholder="Search place"/>
-				<List list={this.state.list} onShowList={onShowList}/>
+				<List list={this.state.list} 
+					onShowList={onShowList} 
+					getAddLocation={getAddLocation}
+				/>
 			</div>
 		);
 	}
