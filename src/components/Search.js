@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import List from './List';
-// import customData from './../city.list.json';
 
 class Search extends Component {
 	constructor (props) {
@@ -15,7 +14,7 @@ class Search extends Component {
 	}
 
 	componentDidMount() {
-		import("./../city.list.json")
+		import("./../list.json")
 			// .then(res => res.json())
 			.then(
 				(result) => {
@@ -38,43 +37,32 @@ class Search extends Component {
 	}
 
 	getLocation(e) {
-		const word = e.target.value.toLowerCase();
-		const arr = this.state.customData;
+		const word = e.target.value.toUpperCase();
+		const obj = this.state.customData;
+		const tempArr = [];
 		let counter = 0;
-		let tempArr = [];
-		for (let i=0; i < arr.length; i++) {
-			if (arr[i].name.toLowerCase().indexOf(word) !== -1 ) {
-				tempArr.push(arr[i].name);
-				this.setState({list:tempArr});
-				counter += 1;
+
+		if (word.charCodeAt(0) >= 65 && word.charCodeAt(0) <= 90) {
+			const arr = obj[word.charAt(0)];
+			for (let i=0; i < arr.length; i++) {
+
+				if (arr[i].name.toUpperCase().indexOf(word) === 0 ) {
+					tempArr.push({"name":arr[i].name, "country":arr[i].country});
+					this.setState({list:tempArr});
+					counter += 1;
+				}
+				if (counter >= 10) {
+					break;
+				}
 			}
-			if (counter >= 10) {
-				break;
-			}
+		} else {
+			this.setState({list:[]});
 		}
-		// const list = this.state.customData.filter(function(item) {
-		// 	let compare = item.name.toLowerCase().indexOf(word);
-		// 	if (compare != -1) {
-		// 		return item.name;
-		// 	}
-		// });
-		// this.setState({list:list});
-		// list.forEach(function(item, i, arr) {
-		//   console.log(item.name);
-		// });
-
-		// for (var i = list.length - 1; i >= 0; i--) {
-		// 	console.log(list[i]);
-		// }
-
-			console.log(tempArr);
 	}
 
 	render() {
 		const {onShowList} = this.props;
-					// {list} = this.state;
 
-					// console.log(list);
 		return (
 
 			<div className="search-container">
@@ -82,8 +70,7 @@ class Search extends Component {
 					onClick={onShowList}
 				><span>Close</span></button>
 				<input className="form-control" onKeyUp={this.getLocation} placeholder="Search place"/>
-				<List list={this.state.list}/>
-				
+				<List list={this.state.list} onShowList={onShowList}/>
 			</div>
 		);
 	}
