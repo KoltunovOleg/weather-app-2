@@ -8,45 +8,55 @@ class Drop extends Component {
 		super(props);
 		this.state = {
 			showDrop: false,
-			listLocation: [
-			{ "name": "Kharkiv",
-				"country": "ua"
-			},
-			{ "name": "Maroco",
-				"country": "ma"
-			}
-			]
+			listLocation: []
 		}
 
 		this.handleClick = this.handleClick.bind(this);
-		this.getAddLocation = this.getAddLocation.bind(this);
+		this.removeLocation = this.removeLocation.bind(this);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setListLocation(nextProps);
+	}
+
+
+	setListLocation(nextProps) {
+
+		this.setState({
+			listLocation: this.props.listOfPlaces
+		});
+	}
+
+	removeLocation(id) {
+		const arr = this.state.listLocation;
+		arr.forEach((item, i)=>{
+			if(item.id === +id) {
+				this.state.listLocation.splice(i, 1);
+			}
+		});
+
+		this.setState({
+			listLocation: this.state.listLocation
+		});
 	}
 
 	handleClick () {
 		this.setState({showDrop: !this.state.showDrop });
 	}
 
-	getAddLocation(list) {
-		const obj = {
-			"name": list[0],
-			"country": list[1]
-		}
-
-		this.setState({
-			listLocation: this.state.listLocation.push(obj) 
-		});
-	}
-
 		render() {
-			const {onShowDrop} = this.props;
+			const {onShowDrop, addLocation, listOfPlaces} = this.props;
 			const search =  this.state.showDrop ? 
 			<Search onShowList={this.handleClick}
-							getAddLocation={this.getAddLocation}
-			/>: null;
+							addLocation={addLocation} /> : null;
 			return (
 				<div className="drop">
 				<NavOpener onShowDrop={onShowDrop}/>
-					<LocationItem listLocation={this.state.listLocation} />
+					<LocationItem 
+					listLocations={this.state.listLocation} 
+					listOfPlaces={listOfPlaces}
+					removeLocation={this.removeLocation}
+					setCurrentPlace={this.setCurrentPlace} />
 						{search}
 					<button className="btn-add" 
 					onClick={this.handleClick}

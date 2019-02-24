@@ -4,6 +4,7 @@ import DateComponent from './components/DateComponent';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Nav from './components/Nav';
+import load from './utils/Load';
 import './styles/App.css';
 
 class App extends Component {
@@ -16,9 +17,12 @@ class App extends Component {
 			bgImg: "",
 			daypart: "",
 			showDrop: false,
+			listOfPlaces: []
 		};
 
 		this.onShowDrop = this.onShowDrop.bind(this);
+		this.addLocation = this.addLocation.bind(this);
+		this.setCurrentPlace = this.setCurrentPlace.bind(this);
 	}
 
 	onShowDrop () {
@@ -76,15 +80,43 @@ class App extends Component {
 		});
 	}
 
+	addLocation(id, list) {
+		const sourse = 'http://api.openweathermap.org/data/2.5/weather?q=';
+		const endpoint = '&units=metric&APPID=54688ee88a6a2630601c504f2b93f60a';
+		const url = sourse +list[0] +',' + list[1].toLowerCase() + endpoint;
+		// console.log(list);
+		fetch(url)
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+        	this.state.listOfPlaces.push({
+        		id: id,
+						name: list[0],
+						country: list[1],
+						dataArr: data
+        	});
+        	this.setState({
+        		listOfPlaces: this.state.listOfPlaces
+        	});
+        });
+
+		// console.log(this.state.listOfPlaces);
+	}
+
 
 
 	render() {
-		const { bgImg, daypart, dataArr, showDrop} = this.state;
+		const { bgImg, daypart, dataArr, showDrop, listOfPlaces} = this.state;
 		const classHidden = showDrop ? "active-nav" : "";
 		return (
 			<div className={`app ${daypart} ${classHidden}`} style={{backgroundImage: bgImg}}>
 				<header className="app-header">
-					<Nav onShowDrop={this.onShowDrop} />
+					<Nav  onShowDrop={this.onShowDrop} 
+								addLocation={this.addLocation}
+								listOfPlaces={listOfPlaces}
+								setCurrentPlace={this.setCurrentPlace}
+					 />
 				</header>
 				<Location/>
 				<div className="date-holder">

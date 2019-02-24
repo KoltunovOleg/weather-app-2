@@ -10,8 +10,9 @@ class Search extends Component {
 
 	handleClick(e) {
 		if(e.target.className === "item-result") {
+			const id = new Date().valueOf();
 			this.props.onShowList();
-			this.props.getAddLocation(e.target.textContent.split(', '));
+			this.props.addLocation(id, e.target.textContent.split(', '));
 		}
 
 	}

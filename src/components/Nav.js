@@ -6,13 +6,18 @@ import '../styles/Nav.css';
 class Nav extends Component {
 
 	render() {
-		const {onShowDrop} = this.props;
+		const {onShowDrop, addLocation, listOfPlaces} = this.props;
 		return (
 			<div className="navigation">
 			<NavOpener onShowDrop={onShowDrop}/>
-			<Drop onShowDrop={onShowDrop}/>
+			<Drop 
+      onShowDrop={onShowDrop} 
+      addLocation={addLocation} 
+      listOfPlaces={listOfPlaces}
+      setCurrentPlace={this.setCurrentPlace}
+      />
 			</div>
-			);
+		);
 	}
 }
 
