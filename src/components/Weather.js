@@ -84,7 +84,7 @@ class Weather extends Component {
 					<div className="cloud">
 						<img className="wicon" src={iconUrl} alt="Weather icon." />
 					</div>
-					<div className="temp"><span>{dataArr.main.temp} &ordm;C</span></div>
+					<div className="temp"><span>{Math.round(dataArr.main.temp)} &ordm;C</span></div>
 					<div className="precipitation">{dataArr.weather[0].main}</div>
 					<div className="wind">{dataArr.wind.speed} m/s</div>
 				</div>

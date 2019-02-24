@@ -4,7 +4,6 @@ import DateComponent from './components/DateComponent';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Nav from './components/Nav';
-import load from './utils/Load';
 import './styles/App.css';
 
 class App extends Component {
@@ -17,7 +16,8 @@ class App extends Component {
 			bgImg: "",
 			daypart: "",
 			showDrop: false,
-			listOfPlaces: []
+			listOfPlaces: [],
+			locationInfo: ["Kiev", "UA"]
 		};
 
 		this.onShowDrop = this.onShowDrop.bind(this);
@@ -104,10 +104,23 @@ class App extends Component {
 		// console.log(this.state.listOfPlaces);
 	}
 
+	setCurrentPlace(id) {
+		console.log(id);
+		console.log(this.state.listOfPlaces);
+		const arr = this.state.listOfPlaces;
+		arr.forEach((item)=>{
+			if(item.id === +id) {
+				this.setState({
+					dataArr:item.dataArr,
+					locationInfo: [item.name, item.country]
+				});
+			}
+		});
 
+	}
 
 	render() {
-		const { bgImg, daypart, dataArr, showDrop, listOfPlaces} = this.state;
+		const { bgImg, daypart, dataArr, showDrop, listOfPlaces, locationInfo} = this.state;
 		const classHidden = showDrop ? "active-nav" : "";
 		return (
 			<div className={`app ${daypart} ${classHidden}`} style={{backgroundImage: bgImg}}>
@@ -118,7 +131,7 @@ class App extends Component {
 								setCurrentPlace={this.setCurrentPlace}
 					 />
 				</header>
-				<Location/>
+				<Location locationInfo={locationInfo}/>
 				<div className="date-holder">
 					<DateComponent/>
 					<Clock/>

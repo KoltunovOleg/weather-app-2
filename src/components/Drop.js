@@ -45,7 +45,7 @@ class Drop extends Component {
 	}
 
 		render() {
-			const {onShowDrop, addLocation, listOfPlaces} = this.props;
+			const {onShowDrop, addLocation, listOfPlaces, setCurrentPlace} = this.props;
 			const search =  this.state.showDrop ? 
 			<Search onShowList={this.handleClick}
 							addLocation={addLocation} /> : null;
@@ -56,7 +56,7 @@ class Drop extends Component {
 					listLocations={this.state.listLocation} 
 					listOfPlaces={listOfPlaces}
 					removeLocation={this.removeLocation}
-					setCurrentPlace={this.setCurrentPlace} />
+					setCurrentPlace={setCurrentPlace} />
 						{search}
 					<button className="btn-add" 
 					onClick={this.handleClick}

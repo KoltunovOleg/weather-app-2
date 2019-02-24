@@ -24,10 +24,12 @@ class LocationItem extends Component {
 	}
 
 	chooseLocation(e) {
-		const elem = e.target;
-		if (elem.classList.contains('location-item')) {
-			console.log(e.target);
-			this.props.setCurrentPlace()
+		const elem = e.target,
+		parent = elem.closest('.location-item');
+		console.log(elem.closest('.location-item'));
+		if (parent) {
+		// 	console.log(e.target);
+			this.props.setCurrentPlace(parent.dataset.id);
 		}
 	}
 	
