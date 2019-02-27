@@ -58,7 +58,7 @@ class Drop extends Component {
 					removeLocation={this.removeLocation}
 					setCurrentPlace={setCurrentPlace} />
 						{search}
-					<button className="btn-add" 
+					<button className="btn btn-add" 
 					onClick={this.handleClick}
 					>Add place</button>
 				</div>

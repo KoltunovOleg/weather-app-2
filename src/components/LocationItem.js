@@ -25,10 +25,18 @@ class LocationItem extends Component {
 
 	chooseLocation(e) {
 		const elem = e.target,
-		parent = elem.closest('.location-item');
-		console.log(elem.closest('.location-item'));
+		parent = elem.closest('.location-item'),
+		parentWrapper = elem.closest('.list-location');
+
 		if (parent) {
-		// 	console.log(e.target);
+			const activeClass = parentWrapper.getElementsByClassName("active");
+			if(activeClass.length) {
+				const arrFromList = [].slice.call(activeClass);
+				arrFromList.forEach(item => {
+					item.classList.remove("active");
+				});
+			}
+			parent.classList.add("active");
 			this.props.setCurrentPlace(parent.dataset.id);
 		}
 	}
@@ -40,7 +48,7 @@ class LocationItem extends Component {
 				const key = place.id;
 				return (
 					<div className="location-item" data-id={key} key={key}>
-						<button className="btn-delete" onClick={this.handleClick}>Delete</button>
+						<button className="btn-delete btn-close" onClick={this.handleClick}>Delete</button>
 						<div className="location-info">
 							<span className="place">{place.name}</span>
 							<div className="temp"><span>{Math.round(place.dataArr.main.temp)} &ordm;C</span></div>

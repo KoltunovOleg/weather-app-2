@@ -4,6 +4,9 @@ import DateComponent from './components/DateComponent';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Nav from './components/Nav';
+import moment from 'moment';
+import 'moment-timezone';
+import cityTimezones from 'city-timezones';
 import './styles/App.css';
 
 class App extends Component {
@@ -105,8 +108,6 @@ class App extends Component {
 	}
 
 	setCurrentPlace(id) {
-		console.log(id);
-		console.log(this.state.listOfPlaces);
 		const arr = this.state.listOfPlaces;
 		arr.forEach((item)=>{
 			if(item.id === +id) {
@@ -117,14 +118,19 @@ class App extends Component {
 			}
 		});
 
+		// http://api.timezonedb.com/v2.1/get-time-zone?key=ABNP00XZPE7G&format=json&by=position&lat=51.51&lng=-0.13
+
 	}
 
 	render() {
 		const { bgImg, daypart, dataArr, showDrop, listOfPlaces, locationInfo} = this.state;
 		const classHidden = showDrop ? "active-nav" : "";
+		const cityLookup = cityTimezones.lookupViaCity(locationInfo[0]);
+		// console.log(cityLookup[0].timezone);
 		return (
 			<div className={`app ${daypart} ${classHidden}`} style={{backgroundImage: bgImg}}>
 				<header className="app-header">
+				<div>{moment.tz(new Date(), "Asia\/Oral").format("hh:mm A")}</div>
 					<Nav  onShowDrop={this.onShowDrop} 
 								addLocation={this.addLocation}
 								listOfPlaces={listOfPlaces}
