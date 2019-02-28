@@ -44,7 +44,7 @@ class Weather extends Component {
 		 || (weatnerID >= 300 && weatnerID <= 321) ) {
 			this.setState({iconUrl: "/img/collection/rain.svg"});
 		} else if (600 <= weatnerID && weatnerID <= 622) {
-			this.setState({iconUrl: "/img/collection/snow.svg"});
+			this.setState({iconUrl: "/img/collection/snowy.svg"});
 		} else if (200 <= weatnerID && weatnerID <= 232) {
 			this.setState({iconUrl: "/img/collection/storm.svg"});
 		} else if (700 <= weatnerID && weatnerID <= 781) {

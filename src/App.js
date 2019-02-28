@@ -4,7 +4,6 @@ import DateComponent from './components/DateComponent';
 import Clock from './components/Clock';
 import Weather from './components/Weather';
 import Nav from './components/Nav';
-import moment from 'moment';
 import 'moment-timezone';
 import cityTimezones from 'city-timezones';
 import './styles/App.css';
@@ -20,7 +19,9 @@ class App extends Component {
 			daypart: "",
 			showDrop: false,
 			listOfPlaces: [],
-			locationInfo: ["Kiev", "UA"]
+			locationInfo: ["Kiev", "UA"],
+			coord: [],
+			timeZone: 'Europe/Kiev'
 		};
 
 		this.onShowDrop = this.onShowDrop.bind(this);
@@ -109,28 +110,47 @@ class App extends Component {
 
 	setCurrentPlace(id) {
 		const arr = this.state.listOfPlaces;
+
 		arr.forEach((item)=>{
 			if(item.id === +id) {
+				const lat = item.dataArr.coord.lat,
+							lng = item.dataArr.coord.lon;
+				this.state.coord.push(lat,lng);
+
 				this.setState({
 					dataArr:item.dataArr,
-					locationInfo: [item.name, item.country]
+					locationInfo: [item.name, item.country],
+					coord: this.state.coord
 				});
 			}
 		});
 
-		// http://api.timezonedb.com/v2.1/get-time-zone?key=ABNP00XZPE7G&format=json&by=position&lat=51.51&lng=-0.13
+		this.getTimeZone(this.state.coord);
+	}
 
+	getTimeZone(coord) {
+		const sourse = 'http://api.timezonedb.com/v2.1/get-time-zone?key=ABNP00XZPE7G&format=json&by=position&';
+		const endpoint = 'lat='+ coord[0] + '&lng='+ coord[1];
+		const url = sourse + endpoint;
+		fetch(url)
+		.then((res) => {
+			return res.json();
+		})
+		.then((data) => {
+			console.log(data.zoneName);
+			this.setState({
+				timeZone: data.zoneName
+			});
+		});
 	}
 
 	render() {
-		const { bgImg, daypart, dataArr, showDrop, listOfPlaces, locationInfo} = this.state;
+		const { bgImg, daypart, dataArr, showDrop, listOfPlaces, locationInfo, timeZone} = this.state;
 		const classHidden = showDrop ? "active-nav" : "";
-		const cityLookup = cityTimezones.lookupViaCity(locationInfo[0]);
-		// console.log(cityLookup[0].timezone);
 		return (
 			<div className={`app ${daypart} ${classHidden}`} style={{backgroundImage: bgImg}}>
 				<header className="app-header">
-				<div>{moment.tz(new Date(), "Asia\/Oral").format("hh:mm A")}</div>
+					<Clock/>
 					<Nav  onShowDrop={this.onShowDrop} 
 								addLocation={this.addLocation}
 								listOfPlaces={listOfPlaces}
@@ -140,7 +160,7 @@ class App extends Component {
 				<Location locationInfo={locationInfo}/>
 				<div className="date-holder">
 					<DateComponent/>
-					<Clock/>
+					<Clock timeZone={timeZone}/>
 				</div>
 				<Weather dataArr={dataArr} />
 			</div>
