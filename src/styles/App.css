@@ -28,3 +28,9 @@ ol, ul {
 .app-header {
 	/*position: relative;*/
 }
+
+.localtime {
+	position: absolute;
+	right: 25px;
+	text-align: right;
+}

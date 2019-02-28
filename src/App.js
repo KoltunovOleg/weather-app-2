@@ -21,6 +21,7 @@ class App extends Component {
 			listOfPlaces: [],
 			locationInfo: ["Kiev", "UA"],
 			coord: [],
+			localTimeZone: 'Europe/Kiev',
 			timeZone: 'Europe/Kiev'
 		};
 
@@ -88,7 +89,7 @@ class App extends Component {
 		const sourse = 'http://api.openweathermap.org/data/2.5/weather?q=';
 		const endpoint = '&units=metric&APPID=54688ee88a6a2630601c504f2b93f60a';
 		const url = sourse +list[0] +',' + list[1].toLowerCase() + endpoint;
-		// console.log(list);
+
 		fetch(url)
         .then((res) => {
             return res.json();
@@ -115,7 +116,8 @@ class App extends Component {
 			if(item.id === +id) {
 				const lat = item.dataArr.coord.lat,
 							lng = item.dataArr.coord.lon;
-				this.state.coord.push(lat,lng);
+				this.state.coord[0] = lat;
+				this.state.coord[1] = lng;
 
 				this.setState({
 					dataArr:item.dataArr,
@@ -145,12 +147,16 @@ class App extends Component {
 	}
 
 	render() {
-		const { bgImg, daypart, dataArr, showDrop, listOfPlaces, locationInfo, timeZone} = this.state;
+		const { bgImg, daypart, dataArr, showDrop, 
+			listOfPlaces, locationInfo, 
+			timeZone, localTimeZone} = this.state;
 		const classHidden = showDrop ? "active-nav" : "";
 		return (
 			<div className={`app ${daypart} ${classHidden}`} style={{backgroundImage: bgImg}}>
 				<header className="app-header">
-					<Clock/>
+					<div className="localtime">
+						<Clock timeZone={localTimeZone}/>
+					</div>
 					<Nav  onShowDrop={this.onShowDrop} 
 								addLocation={this.addLocation}
 								listOfPlaces={listOfPlaces}
@@ -159,7 +165,7 @@ class App extends Component {
 				</header>
 				<Location locationInfo={locationInfo}/>
 				<div className="date-holder">
-					<DateComponent/>
+					<DateComponent  timeZone={timeZone}/>
 					<Clock timeZone={timeZone}/>
 				</div>
 				<Weather dataArr={dataArr} />
